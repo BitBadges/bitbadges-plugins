@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import '../../app/globals.css';
 
-interface ContextInfo {
+export interface ContextInfo {
     address: string;
     claimId: string;
     cosmosAddress: string;
@@ -25,11 +25,10 @@ export default function Claim() {
         console.error('Error parsing context', e);
     }
 
+    const [testMode, setTestMode] = useState(true);
     const [customBody, setCustomBody] = useState<MyPluginCustomBody>({
         claimToken: crypto.randomUUID(),
     });
-
-    const [testMode, setTestMode] = useState(true);
 
     return (
         <main className="flex min-h-screen flex-col items-center p-24">
@@ -68,7 +67,7 @@ export default function Claim() {
                         type="submit"
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         onClick={() => {
-                            //TODO:
+                            //TODO: Authenticate the user for access to gated information?
                         }}
                     >
                         Sign In to XYZ
@@ -97,11 +96,10 @@ export default function Claim() {
                     <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         onClick={() => {
-                            //TODO: Save claim token to backend
+                            //TODO: Save claim token to backend for future lookup from handler
 
                             if (testMode) {
-                                //We will call your backend handler in testmode
-                                //Location will be http://localhost:3000/exampleappname/claim
+                                //We will call your backend handler directly in test mode
                                 const appname =
                                     window.location.pathname.split('/')[1];
 
@@ -119,21 +117,19 @@ export default function Claim() {
                                     .catch((error) => {
                                         console.error('Error:', error);
                                     });
-
-                                return;
-                            }
-
-                            if (window.opener) {
-                                console.log(
-                                    'Sending message to opener',
-                                    customBody,
-                                    'https://bitbadges.io'
-                                );
-                                window.opener.postMessage(
-                                    customBody,
-                                    'https://bitbadges.io'
-                                );
-                                window.close();
+                            } else {
+                                if (window.opener) {
+                                    console.log(
+                                        'Sending message to opener',
+                                        customBody,
+                                        'https://bitbadges.io'
+                                    );
+                                    window.opener.postMessage(
+                                        customBody,
+                                        'https://bitbadges.io'
+                                    );
+                                    window.close();
+                                }
                             }
                         }}
                     >
