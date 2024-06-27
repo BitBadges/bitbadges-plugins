@@ -14,7 +14,8 @@ export const POST = async (req: NextRequest) => {
         console.log('Received request in handler: ', body);
 
         //See below for all possible fields. This will also include your custom body fields.
-        //Whether fields are populated  will be dependent on your plugin configuration.
+        //Whether fields are populated will be dependent on your plugin configuration when creating it via the developer portal,
+        //so ensure you have the correct fields configured.
         //   const payload = {
         //     ...customBody,//if applicable
         //     email: { id: 'bob@abc.com' }, //If pass email is configured
@@ -51,7 +52,7 @@ export const POST = async (req: NextRequest) => {
             return new Response(
                 JSON.stringify({
                     message:
-                        'Invalid plugin secret. Origin of the request ust be BitBadges',
+                        'Invalid plugin secret. Origin of the request must be BitBadges',
                 }),
                 {
                     status: 401,
