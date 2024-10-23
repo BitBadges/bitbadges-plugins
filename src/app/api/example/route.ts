@@ -13,7 +13,7 @@ export const POST = async (req: NextRequest) => {
         const body = await req.json();
         console.log('Received request in handler: ', body);
 
-        //See below for all possible fields. This will also include your custom body fields.
+        //See docs for all possible fields. This will also include your custom body fields.
         //Whether fields are populated will be dependent on your plugin configuration when creating it via the developer portal,
         //so ensure you have the correct fields configured.
         //   const payload = {
@@ -28,7 +28,7 @@ export const POST = async (req: NextRequest) => {
         //     pluginSecret: pluginDoc.pluginSecret,
         //     claimId: context.claimId,
         //     claimAttemptId: context.claimAttemptId,
-        //     cosmosAddress: context.cosmosAddress, //If pass address is configured
+        //     bitbadgesAddress: context.bitbadgesAddress, //If pass address is configured
         //     _isSimulation: context._isSimulation,
         //     lastUpdated: context.lastUpdated,
         //     createdAt: context.createdAt,

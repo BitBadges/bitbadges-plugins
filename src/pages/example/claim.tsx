@@ -6,9 +6,9 @@ import { TEST_MODE, BITBADGES_FRONTEND_URL } from '@/constants';
 export interface ContextInfo {
     address: string;
     claimId: string;
-    cosmosAddress: string;
     createdAt: number;
     lastUpdated: number;
+    //See docs for all detail that are available to you
 }
 
 interface MyPluginCustomBody {
